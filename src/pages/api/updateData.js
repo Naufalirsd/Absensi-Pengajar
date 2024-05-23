@@ -8,29 +8,44 @@ export default async function updateData(req, res) {
                 .json({ message: "Method tidak diperbolehkan" });
         }
 
-        const { id, nama_transaksi, income, outcome, tanggal, bulan, tahun } =
-            req.body;
+        const {
+            id,
+            hari,
+            tanggal,
+            bulan,
+            tahun,
+            id_pengajar,
+            nama,
+            jam_datang,
+            jam_pulang,
+            keterangan,
+        } = req.body;
 
         if (
             !id ||
-            !nama_transaksi ||
-            !income ||
-            !outcome ||
+            !hari ||
             !tanggal ||
             !bulan ||
-            !tahun
+            !tahun ||
+            !id_pengajar ||
+            !nama ||
+            !jam_datang ||
+            !jam_pulang
         ) {
             return res.status(400).json({ message: "Semua field harus diisi" });
         }
 
         const { rows } = await sql`
-            UPDATE transactions 
-            SET nama_transaksi = ${nama_transaksi},
-                income = ${income},
-                outcome = ${outcome},
+            UPDATE presensi_pengajar 
+            SET hari = ${hari},
                 tanggal = ${tanggal},
                 bulan = ${bulan},
-                tahun = ${tahun}
+                tahun = ${tahun},
+                id_pengajar = ${id_pengajar},
+                nama = ${nama},
+                jam_datang = ${jam_datang},
+                jam_pulang = ${jam_pulang},
+                keterangan = ${keterangan}
             WHERE id = ${id}
             RETURNING *
         `;

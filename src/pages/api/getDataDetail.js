@@ -16,7 +16,7 @@ export default async function getDataDetail(req, res) {
 
         const { rows } = await sql`
             SELECT * 
-            FROM transactions 
+            FROM presensi_pengajar 
             WHERE id = ${id}
         `;
 

@@ -15,7 +15,7 @@ export default async function delData(req, res) {
         }
 
         const { rows } = await sql`
-            DELETE FROM transactions 
+            DELETE FROM presensi_pengajar 
             WHERE id = ${id}
             RETURNING *
         `;

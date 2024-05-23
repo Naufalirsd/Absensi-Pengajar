@@ -8,23 +8,34 @@ export default async function insertData(req, res) {
                 .json({ message: "Method tidak diperbolehkan" });
         }
 
-        const { nama_transaksi, income, outcome, tanggal, bulan, tahun } =
-            req.body;
+        const {
+            hari,
+            tanggal,
+            bulan,
+            tahun,
+            id_pengajar,
+            nama,
+            jam_datang,
+            jam_pulang,
+            keterangan,
+        } = req.body;
 
         if (
-            !nama_transaksi ||
-            !income ||
-            !outcome ||
+            !hari ||
             !tanggal ||
             !bulan ||
-            !tahun
+            !tahun ||
+            !id_pengajar ||
+            !nama ||
+            !jam_datang ||
+            !jam_pulang
         ) {
             return res.status(400).json({ message: "Semua field harus diisi" });
         }
 
         const rows = await sql`
-            INSERT INTO transactions (nama_transaksi, income, outcome, tanggal, bulan, tahun)
-            VALUES (${nama_transaksi}, ${income}, ${outcome}, ${tanggal}, ${bulan}, ${tahun})
+            INSERT INTO presensi_pengajar (hari, tanggal, bulan, tahun, id_pengajar, nama, jam_datang, jam_pulang, keterangan)
+            VALUES (${hari}, ${tanggal}, ${bulan}, ${tahun}, ${id_pengajar}, ${nama}, ${jam_datang}, ${jam_pulang}, ${keterangan})
             RETURNING *
         `;
 

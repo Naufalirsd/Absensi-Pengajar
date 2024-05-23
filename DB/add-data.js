@@ -1,11 +1,12 @@
+// add-presensi-pengajar.js
 require("dotenv").config({ path: ".env.development.local" });
 const { sql } = require("@vercel/postgres");
 
 async function execute() {
     try {
         const rows = await sql`
-            INSERT INTO transactions (nama_transaksi, income, outcome, created_at, tanggal, bulan, tahun)
-            VALUES ('JUDUL', 0, 0, CURRENT_TIMESTAMP, EXTRACT(DAY FROM CURRENT_TIMESTAMP), EXTRACT(MONTH FROM CURRENT_TIMESTAMP), EXTRACT(YEAR FROM CURRENT_TIMESTAMP))
+            INSERT INTO presensi_pengajar (hari, tanggal, bulan, tahun, id_pengajar, nama, jam_datang, jam_pulang, keterangan)
+            VALUES ('Senin', 22, 'Mei', 2024, 1, 'Nama Pengajar', '08:00:00', '16:00:00', 'Normal')
             RETURNING *
         `;
         console.log("Data added:", rows);
