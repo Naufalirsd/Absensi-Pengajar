@@ -55,7 +55,7 @@ export default function Detail() {
 
     return (
         <Container>
-            <Header>Detail Data</Header>
+            <Header style={{ fontSize: "20px", fontWeight: "bold" }}>Detail Data</Header>
             {showData ? (
                 <DetailCard>
                     <DetailItem>
