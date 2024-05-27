@@ -1,6 +1,48 @@
 import { useRouter } from "next/router";
+import styled from "styled-components";
 
-export default function Home() {
+const Container = styled.div`
+    padding: 20px;
+    font-family: Arial, sans-serif;
+`;
+
+const Form = styled.form`
+    max-width: 400px;
+    margin: auto;
+`;
+
+const FormGroup = styled.div`
+    margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+`;
+
+const Input = styled.input`
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+`;
+
+const Button = styled.button`
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    width: 100%;
+`;
+
+export default function AddData() {
     const router = useRouter();
 
     const handleAdd = (event) => {
@@ -29,16 +71,16 @@ export default function Home() {
     };
 
     return (
-        <div>
-            <h1>Absensi</h1>
-            <form onSubmit={handleAdd}>
-                <div style={{ padding: "10px 0" }}>
-                    <label style={{ padding: "0 5px" }}>Nama:</label>
-                    <input name="id_karyawan" required />
-                </div>
-                <div style={{ padding: "10px 0" }}>
-                    <label style={{ padding: "0 5px" }}>Jam datang:</label>
-                    <input
+        <Container>
+            <h1 style={{ textAlign: "center", fontSize: "20px", fontWeight: "bold", marginBottom: "15px" }}>Tambah Data Absensi</h1>
+            <Form onSubmit={handleAdd}>
+                <FormGroup>
+                    <Label>Nama:</Label>
+                    <Input name="id_karyawan" required />
+                </FormGroup>
+                <FormGroup>
+                    <Label>Jam Datang:</Label>
+                    <Input
                         name="jam_datang"
                         defaultValue={
                             new Date().getHours() +
@@ -46,22 +88,13 @@ export default function Home() {
                             String(new Date().getMinutes()).padStart(2, "0")
                         }
                     />
-                </div>
-                <div style={{ padding: "10px 0" }}>
-                    <label style={{ padding: "0 5px" }}>Keterangan:</label>
-                    <input name="keterangan" required />
-                </div>
-                <div className="flex gap-1" style={{ padding: "10px 0" }}>
-                    <button type="submit">Add Data</button>
-                    <button
-                        type="button"
-                        onClick={() => {
-                            router.push(`/`);
-                        }}>
-                        Kembali
-                    </button>
-                </div>
-            </form>
-        </div>
+                </FormGroup>
+                <FormGroup>
+                    <Label>Keterangan:</Label>
+                    <Input name="keterangan" required />
+                </FormGroup>
+                <Button type="submit">Add Data</Button>
+            </Form>
+        </Container>
     );
 }

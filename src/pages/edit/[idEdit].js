@@ -1,6 +1,64 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const Container = styled.div`
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: auto;
+`;
+
+const Header = styled.h1`
+    text-align: center;
+    color: #2c3e50;
+`;
+
+const Form = styled.form`
+    display: flex;
+    flex-direction: column;
+`;
+
+const FormGroup = styled.div`
+    margin-bottom: 15px;
+`;
+
+const Label = styled.label`
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #495057;
+`;
+
+const Input = styled.input`
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    width: 100%;
+`;
+
+const Button = styled.button`
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+`;
+
+const BackButton = styled.button`
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+`;
 
 export default function EditPage() {
     const router = useRouter();
@@ -8,20 +66,19 @@ export default function EditPage() {
     const [dataDetail, setDataDetail] = useState();
 
     useEffect(() => {
-        if (!idEdit) {
-            return;
-        }
+        if (!idEdit) return;
+
         fetch(`/api/getDataDetail?id=${idEdit}`)
             .then((res) => res.json())
             .then((data) => {
                 setDataDetail(data.data[0]);
             })
             .catch((err) => {
-                alert("eror ", err.message);
+                alert("Error: ", err.message);
             });
     }, [idEdit]);
 
-    const handleSumbit = (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         const id_karyawan = event.target.id_karyawan.value;
         const jam_datang = event.target.jam_datang.value;
@@ -29,9 +86,6 @@ export default function EditPage() {
         const hari = parseInt(event.target.hari.value);
         const bulan = parseInt(event.target.bulan.value);
         const tahun = parseInt(event.target.tahun.value);
-
-        console.log("jam datang ", jam_datang);
-        console.log("jam pulang ", jam_pulang);
 
         fetch(`/api/updateAdmin?id=${idEdit}`, {
             method: "PUT",
@@ -54,63 +108,70 @@ export default function EditPage() {
                 router.push("/admin");
             })
             .catch((err) => {
-                alert("eror ", err.message);
+                alert("Error: ", err.message);
             });
     };
 
     return (
-        <div>
-            <h1>Halaman edit</h1>
-
+        <Container>
+            <Header>Halaman Edit</Header>
             {dataDetail === null && <p>Data Kosong</p>}
             {dataDetail === undefined && <p>Loading...</p>}
             {dataDetail && (
-                <form onSubmit={handleSumbit}>
-                    <div>
-                        <label>Nama: </label>
-                        <input
+                <Form onSubmit={handleSubmit}>
+                    <FormGroup>
+                        <Label>Nama:</Label>
+                        <Input
                             name="id_karyawan"
                             required
-                            defaultValue={dataDetail.id_karyawan}></input>
-                    </div>
-                    <div>
-                        <label>Jam datang: </label>
-                        <input
+                            defaultValue={dataDetail.id_karyawan}
+                        />
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Jam Datang:</Label>
+                        <Input
                             name="jam_datang"
                             type="text"
                             defaultValue={dataDetail.jam_datang}
                         />
-                    </div>
-                    <div>
-                        <label>Jam pulang: </label>
-                        <input
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Jam Pulang:</Label>
+                        <Input
                             name="jam_pulang"
                             type="text"
                             defaultValue={dataDetail.jam_pulang}
                         />
-                    </div>
-                    <div>
-                        <label>Tanggal: </label>
-                        <input
+                    </FormGroup>
+                    <FormGroup>
+                        <Label>Tanggal:</Label>
+                        <Input
                             name="hari"
                             required
                             placeholder="Hari"
-                            defaultValue={dataDetail.hari}></input>
-                        <input
+                            defaultValue={dataDetail.hari}
+                        />
+                        <Input
                             name="bulan"
                             required
                             placeholder="Bulan"
-                            defaultValue={dataDetail.bulan}></input>
-                        <input
+                            defaultValue={dataDetail.bulan}
+                        />
+                        <Input
                             name="tahun"
                             required
                             placeholder="Tahun"
-                            defaultValue={dataDetail.tahun}></input>
-                    </div>
-                    <button type="submit">Edit</button>
-                    <Link href={`/admin`}>Kembali</Link>
-                </form>
+                            defaultValue={dataDetail.tahun}
+                        />
+                    </FormGroup>
+                    <Button type="submit">Edit</Button>
+                    <BackButton
+                        type="button"
+                        onClick={() => router.push("/admin")}>
+                        Kembali
+                    </BackButton>
+                </Form>
             )}
-        </div>
+        </Container>
     );
 }
