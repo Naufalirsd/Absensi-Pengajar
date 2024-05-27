@@ -42,7 +42,7 @@ export default function Admin() {
                         <div key={index}>
                             {data.id}
                             {".  "}
-                            {data.id_karyawan} {data.jam_datang}{" "}
+                            {data.id_pengajar} {data.jam_datang}{" "}
                             {data.jam_pulang}
                             {" - "}
                             {data.hari}
