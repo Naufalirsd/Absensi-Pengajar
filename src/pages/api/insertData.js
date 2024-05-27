@@ -33,7 +33,7 @@ export default async function insertData(req, res) {
             return res.status(400).json({ message: "Semua field harus diisi" });
         }
 
-        const rows = await sql`
+        const { rows } = await sql`
             INSERT INTO presensi_pengajar (hari, tanggal, bulan, tahun, id_pengajar, nama, jam_datang, jam_pulang, keterangan)
             VALUES (${hari}, ${tanggal}, ${bulan}, ${tahun}, ${id_pengajar}, ${nama}, ${jam_datang}, ${jam_pulang}, ${keterangan})
             RETURNING *

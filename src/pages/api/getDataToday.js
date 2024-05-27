@@ -8,15 +8,20 @@ export default async function getDataToday(req, res) {
                 .json({ message: "Method tidak diperbolehkan" });
         }
 
+        const currentDate = new Date();
+        const currentDay = currentDate.getDate();
+        const currentMonth = currentDate.getMonth() + 1;
+        const currentYear = currentDate.getFullYear();
+
         const { rows } = await sql`
             SELECT * 
             FROM presensi_pengajar
-            WHERE tanggal = EXTRACT(DAY FROM CURRENT_DATE)
-            AND bulan = TO_CHAR(CURRENT_DATE, 'Month')
-            AND tahun = EXTRACT(YEAR FROM CURRENT_DATE)
+            WHERE tanggal = ${currentDay}
+            AND bulan = ${currentMonth}
+            AND tahun = ${currentYear}
         `;
 
-        res.status(200).json({ message: "Success", data: rows });
+        res.status(200).json({ data: rows });
     } catch (e) {
         console.log("ADA ERROR ", e);
         return res.status(500).json({ message: "Terjadi error" });

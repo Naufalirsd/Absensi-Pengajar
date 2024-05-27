@@ -66,12 +66,15 @@ export default function EditData() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const nama_transaksi = event.target.nama_transaksi.value;
-        const income = parseInt(event.target.income.value);
-        const outcome = parseInt(event.target.outcome.value);
+        const hari = event.target.hari.value;
         const tanggal = parseInt(event.target.tanggal.value);
         const bulan = parseInt(event.target.bulan.value);
         const tahun = parseInt(event.target.tahun.value);
+        const id_pengajar = parseInt(event.target.id_pengajar.value);
+        const nama = event.target.nama.value;
+        const jam_datang = event.target.jam_datang.value;
+        const jam_pulang = event.target.jam_pulang.value;
+        const keterangan = event.target.keterangan.value;
 
         fetch(`/api/updateData`, {
             method: "PUT",
@@ -80,12 +83,15 @@ export default function EditData() {
             },
             body: JSON.stringify({
                 id: idEdit,
-                nama_transaksi: nama_transaksi,
-                income: income,
-                outcome: outcome,
+                hari: hari,
                 tanggal: tanggal,
                 bulan: bulan,
                 tahun: tahun,
+                id_pengajar: id_pengajar,
+                nama: nama,
+                jam_datang: jam_datang,
+                jam_pulang: jam_pulang,
+                keterangan: keterangan,
             }),
         })
             .then((res) => res.json())
@@ -105,30 +111,11 @@ export default function EditData() {
             {dataDetail === null && <p>Data Kosong</p>}
             {dataDetail && (
                 <div>
-                    <Header>Edit Data Transaksi</Header>
+                    <Header>Edit Data Presensi Pengajar</Header>
                     <Form onSubmit={handleSubmit}>
                         <FormGroup>
-                            <Label>Nama Transaksi:</Label>
-                            <Input
-                                name="nama_transaksi"
-                                defaultValue={dataDetail.nama_transaksi}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Income:</Label>
-                            <Input
-                                name="income"
-                                type="number"
-                                defaultValue={dataDetail.income}
-                            />
-                        </FormGroup>
-                        <FormGroup>
-                            <Label>Outcome:</Label>
-                            <Input
-                                name="outcome"
-                                type="number"
-                                defaultValue={dataDetail.outcome}
-                            />
+                            <Label>Hari:</Label>
+                            <Input name="hari" defaultValue={dataDetail.hari} />
                         </FormGroup>
                         <FormGroup>
                             <Label>Tanggal:</Label>
@@ -154,6 +141,39 @@ export default function EditData() {
                                 defaultValue={dataDetail.tahun}
                             />
                         </FormGroup>
+                        <FormGroup>
+                            <Label>ID Pengajar:</Label>
+                            <Input
+                                name="id_pengajar"
+                                type="number"
+                                defaultValue={dataDetail.id_pengajar}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Nama:</Label>
+                            <Input name="nama" defaultValue={dataDetail.nama} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Jam Datang:</Label>
+                            <Input
+                                name="jam_datang"
+                                defaultValue={dataDetail.jam_datang}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Jam Pulang:</Label>
+                            <Input
+                                name="jam_pulang"
+                                defaultValue={dataDetail.jam_pulang}
+                            />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>Keterangan:</Label>
+                            <Input
+                                name="keterangan"
+                                defaultValue={dataDetail.keterangan}
+                            />
+                        </FormGroup>
                         <SubmitButton type="submit">Update Data</SubmitButton>
                         <button
                             onClick={() => {
@@ -167,4 +187,3 @@ export default function EditData() {
         </Container>
     );
 }
-

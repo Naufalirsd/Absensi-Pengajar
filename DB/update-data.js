@@ -1,4 +1,3 @@
-// update-presensi-pengajar.js
 require("dotenv").config({ path: ".env.development.local" });
 const { sql } = require("@vercel/postgres");
 
@@ -6,9 +5,9 @@ async function execute() {
     try {
         const { rows } = await sql`
             UPDATE presensi_pengajar 
-            SET hari = 'Selasa',
-                tanggal = 23,
-                bulan = 'Mei',
+            SET hari = 'Senin',
+                tanggal = 27,
+                bulan = 5,
                 tahun = 2024,
                 id_pengajar = 2,
                 nama = 'Nama Pengajar Baru',

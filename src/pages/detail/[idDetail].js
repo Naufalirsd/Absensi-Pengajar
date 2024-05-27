@@ -59,29 +59,34 @@ export default function Detail() {
             {showData ? (
                 <DetailCard>
                     <DetailItem>
-                        <strong>Id:</strong> {idDetail}
+                        <strong>ID:</strong> {idDetail}
                     </DetailItem>
                     <DetailItem>
-                        <strong>Nama Transaksi:</strong>{" "}
-                        {showData.nama_transaksi}
+                        <strong>Hari:</strong> {showData.hari}{" "}
                     </DetailItem>
                     <DetailItem>
-                        <strong>Income:</strong> {showData.income}
+                        <strong>Tanggal:</strong> {showData.tanggal}{" "}
                     </DetailItem>
                     <DetailItem>
-                        <strong>Outcome:</strong> {showData.outcome}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Tanggal:</strong> {showData.tanggal}
-                    </DetailItem>
-                    <DetailItem>
-                        <strong>Bulan:</strong> {showData.bulan}
+                        <strong>Bulan:</strong> {showData.bulan}{" "}
                     </DetailItem>
                     <DetailItem>
                         <strong>Tahun:</strong> {showData.tahun}
                     </DetailItem>
                     <DetailItem>
-                        <strong>Created At:</strong> {showData.created_at}
+                        <strong>ID Pengajar:</strong> {showData.id_pengajar}{" "}
+                    </DetailItem>
+                    <DetailItem>
+                        <strong>Nama:</strong> {showData.nama}
+                    </DetailItem>
+                    <DetailItem>
+                        <strong>Jam Datang:</strong> {showData.jam_datang}{" "}
+                    </DetailItem>
+                    <DetailItem>
+                        <strong>Jam Pulang:</strong> {showData.jam_pulang}
+                    </DetailItem>
+                    <DetailItem>
+                        <strong>Keterangan:</strong> {showData.keterangan}
                     </DetailItem>
                 </DetailCard>
             ) : (
