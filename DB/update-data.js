@@ -5,14 +5,11 @@ async function execute() {
     try {
         const { rows } = await sql`
             UPDATE presensi_pengajar 
-            SET hari = 'Senin',
-                tanggal = 27,
+            SET hari = 28,
                 bulan = 5,
                 tahun = 2024,
-                id_pengajar = 2,
-                nama = 'Nama Pengajar Baru',
-                jam_datang = '09:00:00',
-                jam_pulang = '17:00:00',
+                id_karyawan = 'Saiful',
+                jam_datang = '09:00',
                 keterangan = 'Terlambat'
             WHERE id = 1
             RETURNING *

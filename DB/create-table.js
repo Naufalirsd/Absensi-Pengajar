@@ -10,7 +10,7 @@ async function execute() {
     CREATE TABLE IF NOT EXISTS presensi_pengajar (
         id SERIAL PRIMARY KEY,
         id_karyawan VARCHAR(20) NOT NULL,
-        tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+        tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         jam_datang VARCHAR(5), 
         jam_pulang VARCHAR(5),
         keterangan VARCHAR,
