@@ -1,18 +1,14 @@
 const { sql } = require("@vercel/postgres");
 
 async function updateData(req, res) {
-
     console.log(req.body);
 
-    res.end()
-
-
-    // try {
-    //     if (req.method !== "PUT") {
-    //         return res
-    //             .status(405)
-    //             .json({ message: "Method tidak diperbolehkan" });
-    //     }
+    try {
+        if (req.method !== "PUT") {
+            return res
+                .status(405)
+                .json({ message: "Method tidak diperbolehkan" });
+        }
 
         // const { id_karyawan, jam_datang, jam_pulang, hari, bulan, tahun } = req.body;
         // const { id } = await req.query;
@@ -25,10 +21,10 @@ async function updateData(req, res) {
         //     await sql`UPDATE presensi_pengajar SET id_karyawan = ${id_karyawan}, jam_datang = ${jam_datang} ,jam_pulang = ${jam_pulang}, hari = ${hari}, bulan =${bulan}, tahun = ${tahun} WHERE id = ${id}`;
 
         // res.status(200).json({ message: "Success", data: rows });
-    // } catch (e) {
-    //     console.log("ADA ERROR ", e);
-    //     return res.status(500).json({ message: "Terjadi error," });
-    // }
+    } catch (e) {
+        console.log("ADA ERROR ", e);
+        return res.status(500).json({ message: "Terjadi error," });
+    }
 }
 
 export default updateData;
